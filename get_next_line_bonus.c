@@ -5,42 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/21 13:49:42 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/21 13:50:53 by gsharony         ###   ########.fr       */
+/*   Created: 2019/10/23 14:00:49 by gsharony          #+#    #+#             */
+/*   Updated: 2019/10/23 14:04:50 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char		*ft_strchr(const char *s, int c)
+static char		*ft_strdup(const char *s1)
 {
-	size_t	a;
+	char	*a;
 
-	a = -1;
-	while (++a < ft_strlen(s) + 1)
-		if (*(s + a) == (char)c)
-			return ((char *)(s + a));
-	return (NULL);
-}
-
-static char		*ft_strnew(size_t size)
-{
-	char	*s;
-
-	if (!(s = (char *)malloc(sizeof(char) * (size + 1))))
+	if (!(a = (char*)malloc(sizeof(*a) * (ft_strlen(s1) + 1))))
 		return (NULL);
-	ft_memset(s, '\0', size + 1);
-	return (s);
-}
-
-static int		ft_linelen(char *a)
-{
-	int		b;
-
-	b = 0;
-	while (a[b] != '\n')
-		b++;
-	return (b);
+	return (ft_strcpy(a, (char *)s1));
 }
 
 static char		*ft_strjoin(char const *s1, char const *s2)
@@ -62,6 +40,38 @@ static char		*ft_strjoin(char const *s1, char const *s2)
 		a[b++] = *s1++;
 	while (*s2)
 		a[b++] = *s2++;
+	a[b] = '\0';
+	return (a);
+}
+
+static int		ft_linelen(char *str)
+{
+	int		a;
+
+	a = 0;
+	while (str[a] != '\n')
+		a++;
+	return (a);
+}
+
+static char		*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*a;
+	size_t	b;
+
+	b = 0;
+	if (!s)
+		return (NULL);
+	if (!(a = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	if (ft_strlen(s) > start)
+	{
+		while (s[start + b] && b < len)
+		{
+			a[b] = s[start + b];
+			b++;
+		}
+	}
 	a[b] = '\0';
 	return (a);
 }

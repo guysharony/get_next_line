@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/23 11:38:46 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:21:11 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static char		*ft_strdup(const char *s1)
 	if (!(a = (char*)malloc(sizeof(*a) * (ft_strlen(s1) + 1))))
 		return (NULL);
 	return (ft_strcpy(a, (char *)s1));
+}
+
+static char		*ft_strnew()
+{
+	char	*a;
+
+	if (!(a = (char *)malloc(sizeof(char) * (1))))
+		return (NULL);
+	a[0] = '\0';
+	return (a);
 }
 
 static char		*ft_strjoin(char const *s1, char const *s2)
@@ -41,16 +51,6 @@ static char		*ft_strjoin(char const *s1, char const *s2)
 	while (*s2)
 		a[b++] = *s2++;
 	a[b] = '\0';
-	return (a);
-}
-
-static int		ft_linelen(char *str)
-{
-	int		a;
-
-	a = 0;
-	while (str[a] != '\n')
-		a++;
 	return (a);
 }
 
@@ -78,22 +78,25 @@ static char		*ft_substr(char const *s, unsigned int start, size_t len)
 
 int				get_next_line(int fd, char **line)
 {
-	char			a[BUFFER_SIZE + 1];
-	static char		*b;
-	int				c;
+	char			buffer[BUFFER_SIZE + 1];
+	static char		*content;
+	int				read_output;
+	char			*tmp;
 
-	if (!b && (b = ft_strnew(0)) == NULL)
+	if ((!content && !(content = ft_strnew())) || !fd || !line)
 		return (-1);
-	while ((c = read(fd, a, BUFFER_SIZE)) > 0)
+	while ((read_output = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		a[c] = '\0';
-		b = ft_strjoin(b, a);
+		buffer[read_output] = '\0';
+		tmp = content;
+		content = ft_strjoin(tmp, buffer);
+		free(tmp);
 	}
-	*line = ft_substr(b, 0, ft_linelen(b));
-	if (ft_strchr(b, '\n'))
+	*line = ft_substr(content, 0, ft_linelen(content));
+	if ((content = get_line(content)) == NULL)
 	{
-		ft_strcpy(b, ft_strchr(b, '\n') + 1);
-		return (1);
+		free(content);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

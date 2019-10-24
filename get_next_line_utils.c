@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:31:09 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/23 11:19:20 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:14:23 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,14 @@ char		*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void		*ft_memset(void *b, int c, size_t len)
+int			ft_linelen(char *str)
 {
-	unsigned char		*a;
-	size_t				d;
+	int		a;
 
-	if (len == 0)
-		return (b);
-	a = (unsigned char *)b;
-	d = 0;
-	while (d < len)
-		a[d++] = (unsigned char)c;
-	return (b);
-}
-
-char		*ft_strnew(size_t size)
-{
-	char	*s;
-
-	if (!(s = (char *)malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	ft_memset(s, '\0', size + 1);
-	return (s);
+	a = 0;
+	while (str[a] != '\n' && str[a] != '\0')
+		a++;
+	return (a);
 }
 
 size_t		ft_strlen(const char *s)
@@ -55,6 +41,15 @@ size_t		ft_strlen(const char *s)
 	while (s[t] != '\0')
 		t++;
 	return (t);
+}
+
+char		*get_line(char *content)
+{
+	if (ft_strchr(content, '\n'))
+		return (ft_strcpy(content, ft_strchr(content, '\n') + 1));
+	else if (ft_linelen(content) > 0)
+		return (ft_strcpy(content, ft_strchr(content, '\0')));
+	return (NULL);
 }
 
 char		*ft_strcpy(char *dest, const char *src)

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/23 10:31:49 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/24 13:16:37 by gsharony         ###   ########.fr       */
+/*   Created: 2019/10/23 14:28:01 by gsharony          #+#    #+#             */
+/*   Updated: 2019/10/24 13:20:23 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
+#include <stdio.h>
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+int		main(int argc, char **argv)
+{
+	int		file;
+	int		c;
+	char	*line;
 
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
-char	*ft_strcpy(char *dest, const char *src);
-int		get_next_line(int fd, char **line);
-char	*get_line(char *content);
-int		ft_linelen(char *str);
-
-#endif
+	if (argc > 1)
+	{
+		file = open(argv[1], O_RDONLY);
+		while ((c = get_next_line(file, &line)))
+			printf("File descriptor[%d]: %s\n", c, line);
+	}
+	else
+		printf("Please enter a file name!\n");
+	return (0);
+}

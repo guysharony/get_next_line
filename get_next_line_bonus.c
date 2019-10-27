@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/27 18:36:40 by guysharon        ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char		*ft_strdup(const char *s1)
 {
@@ -79,23 +67,23 @@ static char		*ft_substr(char const *s, unsigned int start, size_t len)
 int				get_next_line(int fd, char **line)
 {
 	char			buffer[BUFFER_SIZE + 1];
-	static char		*content;
+	static char		*content[200];
 	int				read_output;
 	char			*tmp;
 
-	if ((!content && !(content = ft_strnew())) || fd < 0
+	if ((!content[fd] && !(content[fd] = ft_strnew())) || fd < 0
 	|| !line || BUFFER_SIZE < 1)
 		return (-1);
-	while (!(ft_strchr(content, '\n')) &&
+	while (!(ft_strchr(content[fd], '\n')) &&
 	(read_output = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[read_output] = '\0';
-		tmp = content;
-		content = ft_strjoin(tmp, buffer);
+		tmp = content[fd];
+		content[fd] = ft_strjoin(tmp, buffer);
 		free(tmp);
 	}
-	*line = ft_substr(content, 0, ft_linelen(content));
-	if (get_line(content) == NULL)
+	*line = ft_substr(content[fd], 0, ft_linelen(content[fd]));
+	if (get_line(content[fd]) == NULL)
 		return (0);
 	return (1);
 }

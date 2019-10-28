@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/28 06:39:18 by gsharony          #+#    #+#             */
+/*   Updated: 2019/10/28 06:39:36 by gsharony         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 static char		*ft_strdup(const char *s1)
@@ -9,7 +21,7 @@ static char		*ft_strdup(const char *s1)
 	return (ft_strcpy(a, (char *)s1));
 }
 
-static char		*ft_strnew()
+static char		*ft_strnew(void)
 {
 	char	*a;
 

@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/27 18:36:40 by guysharon        ###   ########.fr       */
+/*   Updated: 2019/10/28 06:38:48 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char		*ft_strdup(const char *s1)
 	return (ft_strcpy(a, (char *)s1));
 }
 
-static char		*ft_strnew()
+static char		*ft_strnew(void)
 {
 	char	*a;
 

@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 06:38:48 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/28 09:20:55 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				get_next_line(int fd, char **line)
 	char			*tmp;
 
 	if ((!content && !(content = ft_strnew())) || fd < 0
-	|| !line || BUFFER_SIZE < 1)
+	|| !line || BUFFER_SIZE < 1 || read(fd, buffer, 0) < 0)
 		return (-1);
 	while (!(ft_strchr(content, '\n')) &&
 	(read_output = read(fd, buffer, BUFFER_SIZE)) > 0)

@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 06:39:18 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 06:39:36 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/28 09:21:35 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ static char		*ft_substr(char const *s, unsigned int start, size_t len)
 int				get_next_line(int fd, char **line)
 {
 	char			buffer[BUFFER_SIZE + 1];
-	static char		*content[200];
+	static char		*content[256];
 	int				read_output;
 	char			*tmp;
 
 	if ((!content[fd] && !(content[fd] = ft_strnew())) || fd < 0
-	|| !line || BUFFER_SIZE < 1)
+	|| !line || BUFFER_SIZE < 1 || read(fd, buffer, 0) < 0)
 		return (-1);
 	while (!(ft_strchr(content[fd], '\n')) &&
 	(read_output = read(fd, buffer, BUFFER_SIZE)) > 0)

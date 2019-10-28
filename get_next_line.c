@@ -6,11 +6,12 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 09:20:55 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/28 13:20:54 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char		*ft_strdup(const char *s1)
 {
@@ -83,8 +84,9 @@ int				get_next_line(int fd, char **line)
 	int				read_output;
 	char			*tmp;
 
-	if ((!content && !(content = ft_strnew())) || fd < 0
-	|| !line || BUFFER_SIZE < 1 || read(fd, buffer, 0) < 0)
+	if (!content && (content = ft_strnew()) == NULL)
+		return (-1);
+	if (fd < 0 || !line || BUFFER_SIZE < 1 || read(fd, buffer, 0) < 0)
 		return (-1);
 	while (!(ft_strchr(content, '\n')) &&
 	(read_output = read(fd, buffer, BUFFER_SIZE)) > 0)

@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 06:39:18 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 09:21:35 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/28 13:14:20 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char		*ft_substr(char const *s, unsigned int start, size_t len)
 int				get_next_line(int fd, char **line)
 {
 	char			buffer[BUFFER_SIZE + 1];
-	static char		*content[256];
+	static char		*content[4096];
 	int				read_output;
 	char			*tmp;
 

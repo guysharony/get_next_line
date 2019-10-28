@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 06:40:22 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 06:40:30 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/28 13:56:33 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			ft_linelen(char *str)
 	int		a;
 
 	a = 0;
-	while (str[a] != '\n' && str[a] != '\0')
+	while (str[a] != '\n')
 		a++;
 	return (a);
 }
@@ -47,8 +47,6 @@ char		*get_line(char *content)
 {
 	if (ft_strchr(content, '\n'))
 		return (ft_strcpy(content, ft_strchr(content, '\n') + 1));
-	else if (ft_linelen(content) > 0)
-		return (ft_strcpy(content, ft_strchr(content, '\0')));
 	return (NULL);
 }
 

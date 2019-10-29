@@ -6,12 +6,11 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:25:51 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/29 07:21:16 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/29 09:25:10 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char		*ft_strdup(const char *s1)
 {

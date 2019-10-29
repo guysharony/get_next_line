@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 06:39:18 by gsharony          #+#    #+#             */
-/*   Updated: 2019/10/28 14:00:32 by gsharony         ###   ########.fr       */
+/*   Updated: 2019/10/29 07:25:14 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ int				get_next_line(int fd, char **line)
 	}
 	*line = ft_substr(content[fd], 0, ft_linelen(content[fd]));
 	if (get_line(content[fd]) == NULL)
+	{
+		free(content[fd]);
+		content[fd] = NULL;
 		return (0);
+	}
 	return (1);
 }
